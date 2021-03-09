@@ -17,8 +17,8 @@ public class LinkController {
         this.linkService = service;
     }
 
-    @GetMapping("{id}")
-    public Mono<String> getUrl(@PathVariable("id") String code) {
+    @GetMapping("{code}")
+    public Mono<String> getUrl(@PathVariable("code") String code) {
         return linkService.getUrl(code);
     }
 
