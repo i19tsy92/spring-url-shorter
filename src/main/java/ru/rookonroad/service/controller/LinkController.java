@@ -1,0 +1,29 @@
+package ru.rookonroad.service.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
+import ru.rookonroad.service.service.LinkService;
+
+@RestController
+public class LinkController {
+
+    private final LinkService linkService;
+
+    public LinkController(LinkService service) {
+        this.linkService = service;
+    }
+
+    @GetMapping("{id}")
+    public Mono<String> getUrl(@PathVariable("id") String code) {
+        return linkService.getUrl(code);
+    }
+
+    @PostMapping
+    public Mono<String> addUrl(@RequestBody String url) {
+        return linkService.addUrl(url);
+    }
+}
