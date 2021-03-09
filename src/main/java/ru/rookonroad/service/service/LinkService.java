@@ -19,9 +19,9 @@ public class LinkService {
 
     public Mono<String> addUrl(String url) {
         String code = DigestUtils.md5Hex(url);
-        return linkRepo.findByCode(url).switchIfEmpty(
-            linkRepo.save(new Link(UUID.randomUUID(), url, code))
-        ).then(Mono.just(code));
+        return linkRepo.findById(url).switchIfEmpty(
+            linkRepo.save(new Link( url, code))
+        ).map(Link::getCode);
     }
 
     public Mono<String> getUrl(String code) {

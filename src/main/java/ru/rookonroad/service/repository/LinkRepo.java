@@ -5,11 +5,8 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 import ru.rookonroad.service.model.Link;
 
-import java.util.UUID;
-
 @Repository
-public interface LinkRepo extends ReactiveMongoRepository<Link, UUID> {
+public interface LinkRepo extends ReactiveMongoRepository<Link, String> {
 
-    Mono<Link> findByUrl(String url);
     Mono<Link> findByCode(String code);
 }
